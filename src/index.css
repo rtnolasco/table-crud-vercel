@@ -209,7 +209,7 @@ table.table .avatar {
 .modal .modal-content {
 	border-radius: 3px;
 	font-size: 14px;
-	height: 786px;
+	/* height: 786px; */
 }
 .modal .modal-footer {
 	background: #ecf0f1;

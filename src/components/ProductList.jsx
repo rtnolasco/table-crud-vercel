@@ -12,7 +12,7 @@ const ProductList = () => {
 
     const {products, loading} = useContext(ProductContext) 
 
-    const [show, setShow] = useState(true)
+    const [show, setShow] = useState(false)
     const handleShowModal = () => setShow (true)
     const handleCloseModal = () => setShow (false)
    
