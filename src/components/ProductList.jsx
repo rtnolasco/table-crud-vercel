@@ -70,8 +70,7 @@ return (
         <Modal.Body>
             <AddForm />
         </Modal.Body>
-        <Modal.Footer>
-                <Container>
+        <Container style={{marginBottom:"10px"}}>
                     <Row>
                         <Col>
                             <Button onClick={handleCloseModal} className="btn-modal-cancel">Cancel</Button>
@@ -81,6 +80,8 @@ return (
                         </Col>
                     </Row>
             </Container>
+        <Modal.Footer>
+                
         </Modal.Footer>
     </Modal>
 
