@@ -36,12 +36,12 @@ return (
         </div>
     </div>
     <div >
-                <Button onClick={handleShowModal} className='btn-add' data-toggle="modal">Add a product</Button>
+                <Button onClick={handleShowModal} variant="light" data-toggle="modal">Add a product</Button>
             </div>
-     <Table className="table table-striped table-hover">
+     <table className="table table-striped table-hover">
         <thead>
             <tr>
-                <th>ID</th>
+                {/* <th>ID</th> */}
                 <th>Title</th>
                 <th>Category</th>
                 <th>Price</th>
@@ -58,10 +58,10 @@ return (
             ))}
             
         </tbody>
-    </Table>
+    </table>
 
     {/* <ModalAdd show={show}/> */}
-    <Modal show={show} dialogClassName="modal-90w">
+    <Modal show={show} onHide={handleCloseModal}dialogClassName="modal-90w">
         <Modal.Header closeButton>
             <Modal.Title>
                 
@@ -74,10 +74,10 @@ return (
                 <Container>
                     <Row>
                         <Col>
-                            <Button variant="outline-secondary">Cancel</Button>
+                            <Button onClick={handleCloseModal} variant="outline-secondary">Cancel</Button>
                         </Col>
                         <Col>
-                            <Button className="btn-block mr-1 mt-1 btn-lg" variant="primary">Add</Button>
+                            <Button className="btn-modal-add">Add</Button>
                         </Col>
                     </Row>
             </Container>

@@ -15,7 +15,34 @@ body {
 }
 button {
   border: none;
+
 }
+
+.btn-light{
+	align-self: baseline;
+  	display: block !important;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 7px;
+    border: solid thin #d3d2d2;
+
+}
+
+.btn-light:hover{
+	background-color: #e9ecef;
+
+}
+
+.btn-modal-add{
+	background-color: #326295;
+    color: #fff;
+	border-radius: 8px !important;
+    width: inherit;
+	font-size: 1rem;
+	font-weight: 400;
+    line-height: 1.5
+}
+
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
@@ -104,6 +131,16 @@ td {
   min-width: 75px;
   min-height: 82px;
   border-bottom: thin solid #dbdbdb;
+}
+
+td span {
+	border-bottom: none;
+}
+
+td a {
+	color: #3d3d3d;
+	text-decoration:none
+	
 }
 .more-padding-on-right {
   padding-right: 10px !important;
@@ -249,3 +286,11 @@ margin: 5px 0 5px 0;
 
 .modal-90w { max-width: 60% !important; }
 
+.img-bg {
+	background-image: url(/src/assets/fi_chevrons-down.svg);
+	background-size: 56px 24px;
+	background-repeat: no-repeat;
+	display: inline-block;
+	height: 22px;
+	width: 50px;
+}

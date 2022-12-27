@@ -15,7 +15,7 @@ if (loading) {
         
         <>
             <tr key={index}>
-                <td>{product.id}</td> 
+                {/* <td>{product.id}</td>  */}
                 <td>{product.title}</td> 
                 <td>{product.category}</td> 
                 <td>${product.price}</td> 
