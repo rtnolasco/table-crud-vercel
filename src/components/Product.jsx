@@ -20,7 +20,9 @@ if (loading) {
                 <td>{product.category}</td> 
                 <td>${product.price}</td> 
                 <td><img src={product.image} className="tbl-image"></img></td> 
-                <td> 
+                <td style={{width: "111px"}}
+   
+> 
                     <a href="#" className="edit" data-toggle="modal"> Edit </a> &nbsp;   
                     <a href="#" className="edit" data-toggle="modal"> Delete </a>
                 </td> 
