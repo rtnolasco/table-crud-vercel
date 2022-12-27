@@ -11,6 +11,7 @@ if (loading) {
     return <td>Loading...</td>
 }
 
+
     return (
         
         <>
@@ -20,16 +21,14 @@ if (loading) {
                 <td>{product.category}</td> 
                 <td>${product.price}</td> 
                 <td><img src={product.image} className="tbl-image"></img></td> 
-                <td style={{width: "111px"}}
-   
-> 
+                <td style={{width:"111px"}}> 
                     <a href="#" className="edit" data-toggle="modal"> Edit </a> &nbsp;   
                     <a href="#" className="edit" data-toggle="modal"> Delete </a>
                 </td> 
-                <td>
+               
                 <ExpandButton isOpen={isOpen} toggle={toggle}/>
                   
-                </td>
+               
             </tr>
             <tr>{isOpen && <TableRow product={product} />}
             </tr>

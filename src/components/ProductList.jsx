@@ -38,8 +38,7 @@ return (
     <div >
                 <Button onClick={handleShowModal} variant="light" data-toggle="modal">Add a product</Button>
             </div>
-     <table className="table-striped table-hover" style={{
-    width: "1066px"}}>
+     <table className="table-striped table-hover" style={{width: "1066px"}}>
         <thead>
             <tr>
                 {/* <th>ID</th> */}
