@@ -1,4 +1,5 @@
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
+import StarRating from '../StarsRating'
 
 const AddForm = () => {
   return (
@@ -69,12 +70,10 @@ const AddForm = () => {
         
         <Form.Group>
           <Form.Label>Rating</Form.Label>
-        <Form.Control
-          type = "text"
-          
-          >
+        
+         <div style={{display:"flex"}}> <StarRating /> </div>
 
-        </Form.Control>
+        
       </Form.Group>
     <Button variant="succes" type="submit" >Add new product</Button>  
       

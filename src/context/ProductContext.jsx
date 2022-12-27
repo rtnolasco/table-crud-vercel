@@ -22,6 +22,8 @@ const ProductContextProvider = (props) => {
         }
         fetchData()
     },[])
+
+    
    
     return (
         <ProductContext.Provider value={{products, loading}}>
