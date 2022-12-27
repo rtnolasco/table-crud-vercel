@@ -38,7 +38,8 @@ return (
     <div >
                 <Button onClick={handleShowModal} variant="light" data-toggle="modal">Add a product</Button>
             </div>
-     <table className="table table-striped table-hover">
+     <table className="table-striped table-hover" style={{
+    width: "1066px"}}>
         <thead>
             <tr>
                 {/* <th>ID</th> */}
@@ -74,7 +75,7 @@ return (
                 <Container>
                     <Row>
                         <Col>
-                            <Button onClick={handleCloseModal} variant="outline-secondary">Cancel</Button>
+                            <Button onClick={handleCloseModal} className="btn-modal-cancel">Cancel</Button>
                         </Col>
                         <Col>
                             <Button className="btn-modal-add">Add</Button>
