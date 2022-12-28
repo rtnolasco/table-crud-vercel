@@ -24,7 +24,7 @@ const ProductList = () => {
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
     const totalPagesNum = Math.ceil(products.length / productsPerPage);
-
+    
     const addFormRef = useRef()
 
 
@@ -53,9 +53,9 @@ return (
             </tr>
         </thead>
          <tbody>
-                
-            {currentProducts.map((product,index) => (
-               <Product key= {product.id} product={product} loading={loading} index={index}/>
+                {console.log("currentObjects",currentProducts)}
+            {Object.values(currentProducts).map((product,index) => (
+               <Product key={product.id} product={product} loading={loading} index={index}/>
                
             ))}
             

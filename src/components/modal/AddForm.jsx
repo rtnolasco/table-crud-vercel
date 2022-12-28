@@ -7,7 +7,7 @@ import ProductList from '../ProductList'
 
 const AddForm = forwardRef((props, ref) => {
   
-
+  const [imageValue, setImageValue] = useState("https://source.unsplash.com/user/c_v_r/100x100");
   const {addProduct} = useContext(ProductContext)
 
 
@@ -21,14 +21,14 @@ const AddForm = forwardRef((props, ref) => {
   ]
 
   const {title,category,description,price,image,rating} = newProduct
+  
 
 
   const handleSubmit = (e) => {
     // e.preventDefault();
     // console.log(title,category,description,price,image,rating)
-    try{addProduct(title,category,description,price,image,rating)}
-    catch(error){this.setState({ error });}
     
+    addProduct(title,category,description,price,image,rating)
   }
 
   useImperativeHandle(ref, () => ({
@@ -136,8 +136,8 @@ const AddForm = forwardRef((props, ref) => {
 
         
       </Form.Group>
-    <Button variant="succes" type="submit" >Add new product</Button>  
-    <Button onClick={() => props.close()}>close</Button>
+    {/* <Button variant="succes" type="submit" >Add new product</Button>  
+    <Button onClick={() => props.close()}>close</Button> */}
       
     </Form>
     </Container>
