@@ -15,6 +15,7 @@ body {
 }
 button {
   border: none;
+  background-color: transparent;
 
 }
 
@@ -96,6 +97,11 @@ thead th{
 }
 .btn-act {
 	padding: 4px;
+}
+
+btn-edit{
+	background-color: #ffffff !important;
+    border: none;
 }
 .table-responsive {
     margin: 30px 0;
