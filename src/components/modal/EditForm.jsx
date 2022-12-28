@@ -91,8 +91,8 @@ const EditForm = () => {
 
         
       </Form.Group>
-    <Button variant="succes" type="submit" >Add new product</Button>  
-    <Button onClick={() => props.close()}>close</Button>
+    {/* <Button variant="succes" type="submit" >Add new product</Button>  
+    <Button onClick={() => props.close()}>close</Button> */}
       
     </Form>
     </Container>
