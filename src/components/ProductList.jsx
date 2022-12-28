@@ -1,4 +1,4 @@
-import {React, useState, useContext} from 'react'
+import {React, useState, useContext, useRef} from 'react'
 import {ProductContext} from '../context/ProductContext'
 import { Table, Button, Modal,Container, Col, Row } from "react-bootstrap";
 import ModalAdd from './modal/ModalAdd'
@@ -24,6 +24,8 @@ const ProductList = () => {
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
     const totalPagesNum = Math.ceil(products.length / productsPerPage);
+
+    const addFormRef = useRef()
 
 
 return (
@@ -68,7 +70,7 @@ return (
             </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <AddForm />
+            <AddForm ref={addFormRef} close={() => handleCloseModal()} />
         </Modal.Body>
         <Container style={{marginBottom:"10px"}}>
                     <Row>
@@ -76,7 +78,9 @@ return (
                             <Button onClick={handleCloseModal} className="btn-modal-cancel">Cancel</Button>
                         </Col>
                         <Col>
-                            <Button className="btn-modal-add">Add</Button>
+                            
+                            <Button onClick={()=>addFormRef.current.callhandleSubmit()} className="btn-modal-add">Add</Button>
+                           
                         </Col>
                     </Row>
             </Container>

@@ -1,5 +1,6 @@
 import { createContext , useState, useEffect} from "react"
 import axios from "axios"
+import { v4 as uuidv4 } from 'uuid';
 
 export const ProductContext = createContext()
 
@@ -15,7 +16,7 @@ const ProductContextProvider = (props) => {
         async function fetchData() {
             setLoading(true)
             const data = await axios.get(fetchProducts)
-            console.log(data.data)
+            
             setProducts(data.data)
             setLoading(false)
             
@@ -23,10 +24,17 @@ const ProductContextProvider = (props) => {
         fetchData()
     },[])
 
+    // const addProduct = (title, category, description, price, image ,rating) => {
+    //       setProducts (...products,{id:uuidv4(),title, category, description, price, image, rating})
+    //     }
+
+    const deleteProduct = (id) => {
+            setProducts(products.filter(products => products.id !== id))
+
+    }
     
-   
     return (
-        <ProductContext.Provider value={{products, loading}}>
+        <ProductContext.Provider value={{products, loading,  deleteProduct}}>
             {props.children}
         </ProductContext.Provider>
     )

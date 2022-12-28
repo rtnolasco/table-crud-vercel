@@ -1,12 +1,14 @@
-import React from 'react'
+import {React, useContext} from 'react'
 import { TableRow } from './TableRow';
 import { ExpandButton } from './ExpandButton';
 import useOpenController from '../hooks/useOpenController';
 
+import { ProductContext } from '../context/ProductContext';
 
+const Product = ({product, loading, }) => {
+    const {deleteProduct} = useContext(ProductContext)
+    const {isOpen, toggle}= useOpenController(false)
 
-const Product = ({product, loading, index}) => {
- const {isOpen, toggle}= useOpenController(false)
 if (loading) {
     return <td>Loading...</td>
 }
@@ -15,7 +17,7 @@ if (loading) {
     return (
         
         <>
-            <tr key={index}>
+            <tr>
                 {/* <td>{product.id}</td>  */}
                 <td>{product.title}</td> 
                 <td>{product.category}</td> 
@@ -23,7 +25,7 @@ if (loading) {
                 <td><img src={product.image} className="tbl-image"></img></td> 
                 <td style={{width:"111px"}}> 
                     <a href="#" className="edit" data-toggle="modal"> Edit </a> &nbsp;   
-                    <a href="#" className="edit" data-toggle="modal"> Delete </a>
+                    <button onClick={() => deleteProduct(product.id)} className="btn text-danger btn-act" data-toggle="modal"> Delete </button>
                 </td> 
                
                 <ExpandButton isOpen={isOpen} toggle={toggle}/>
