@@ -4,14 +4,19 @@ import { TableRow } from './TableRow';
 import { ExpandButton } from './ExpandButton';
 import useOpenController from '../hooks/useOpenController';
 import EditForm from './modal/EditForm';
+import DeleteAlert from './modal/DeleteAlert';
 
 import { ProductContext } from '../context/ProductContext';
 
-const Product = ({product, loading, }) => {
+const Product = ({product, loading }) => {
 
-    const [show, setShow] = useState(false)
-    const handleShowModal = () => setShow (true)
-    const handleCloseModal = () => setShow (false)
+    const [showEditModal, setShowEditModal] = useState(false)
+    const handleShowEditModal = () => setShowEditModal (true)
+    const handleCloseEditModal = () => setShowEditModal (false)
+
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const handleShowDeleteModal = () => setShowDeleteModal (true)
+    const handleCloseDeleteModal = () => setShowDeleteModal (false)
 
     const {deleteProduct} = useContext(ProductContext)
     const {isOpen, toggle}= useOpenController(false)
@@ -24,23 +29,10 @@ const Product = ({product, loading, }) => {
 
       };
       
-      const options = {
-        // ...
-        rowStyle: (rowData) => {
-          return {
-            backgroundColor: rowBackgroundColors[rowData.priority] ?? "#fff",
-          };
-        },
-        // ...
-      };
-      
-    let {catColor} = [product.category];
-    console.log("catColor",catColor)
 
-
-    function currencyFormat(num) {
-        return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-     }
+    // function currencyFormat(num) {
+    //     return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    //  }
 
         if (loading) {
 
@@ -53,35 +45,57 @@ const Product = ({product, loading, }) => {
                 <td>{product.id}</td> 
                 <td>{product.title}</td> 
                 <td ><div style={{lineHeight:"1.20rem",borderRadius:"8px", backgroundColor: rowBackgroundColors[product.category] ?? "transparent"}}>{product.category}</div> </td> 
-                <td style={{}}>{currencyFormat(product.price)}</td> 
+                <td>&#x20B1;{product.price}</td> 
                 <td><img src={product.image} className="tbl-image"></img></td> 
                 <td style={{width:"130px"}}> 
-                    <button onClick={handleShowModal} className="btn-edit" data-toggle="modal"> Edit </button> &nbsp;   
-                    <button onClick={() => deleteProduct(product.id)} className="btn-edit" data-toggle="modal"> Delete </button>
+                    <button onClick={handleShowEditModal} className="btn-edit" data-toggle="modal1"> Edit </button> &nbsp;   
+                    {/* <button onClick={() => deleteProduct(product.id)} className="btn-edit" data-toggle="modal"> Delete </button> */}
+                    <button onClick={handleShowDeleteModal}className="btn-edit" data-toggle="modal"> Delete </button>
                 </td> 
-                <Modal show={show} onHide={handleCloseModal}dialogClassName="modal-90w">
+                <Modal show={showEditModal} onHide={handleCloseEditModal}dialogClassName="modal-90w">
                     <Modal.Header closeButton>
                         <Modal.Title>
                             
                         </Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
-                        {/* <EditForm ref={addFormRef} close={() => handleCloseModal()} /> */}
-                        <EditForm />
+                        <Modal.Body>
+                            <EditForm />
                         <Container style={{marginBottom:"10px"}}>
-                                <Row>
-                                    <Col>
-                                        <Button onClick={handleCloseModal} className="btn-modal-cancel">Cancel</Button>
-                                    </Col>
-                                    <Col>
-                                        
-                                        {/* <Button onClick={()=>addFormRef.current.callhandleSubmit()} className="btn-modal-add">Add</Button> */}
-                                        <Button className="btn-modal-add">Add</Button> 
-                                    
-                                    </Col>
-                                </Row>
+                            <Row>
+                                <Col>
+                                    <Button onClick={handleCloseEditModal} className="btn-modal-cancel">Cancel</Button>
+                                </Col>
+                                <Col>
+                                    <Button className="btn-modal-add">Add</Button> 
+                                </Col>
+                            </Row>
                         </Container>
-                    </Modal.Body>
+                        </Modal.Body>
+                   
+                    <Modal.Footer>
+                            
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}dialogClassName="modal-60w">
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            
+                        </Modal.Title>
+                    </Modal.Header>
+                        <Modal.Body>
+                            <DeleteAlert productId = {[product.id]} productTitle={[product.title]}/>
+                        <Container style={{marginBottom:"10px"}}>
+                            <Row>
+                                <Col>
+                                    <Button onClick={handleCloseDeleteModal} className="btn-modal-cancel">Cancel</Button>
+                                </Col>
+                                <Col>
+                                    <Button className="btn-modal-add">Delete</Button> 
+                                </Col>
+                            </Row>
+                        </Container>
+                        </Modal.Body>
                    
                     <Modal.Footer>
                             

@@ -336,6 +336,7 @@ margin: 5px 0 5px 0;
 
 
 .modal-90w { max-width: 60% !important; }
+.modal-60w { max-width: 40% !important; }
 
 .img-bg {
 	background-image: url(/src/assets/fi_chevrons-down.svg);

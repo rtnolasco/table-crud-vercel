@@ -1,4 +1,4 @@
-import {React, useState, useContext, useRef} from 'react'
+import {React, useState, useContext, useRef, useEffect} from 'react'
 import {ProductContext} from '../context/ProductContext'
 import { Table, Button, Modal,Container, Col, Row } from "react-bootstrap";
 import ModalAdd from './modal/ModalAdd'
@@ -25,9 +25,13 @@ const ProductList = () => {
     const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
     const totalPagesNum = Math.ceil(products.length / productsPerPage);
     
+    // handle child to parent
     const addFormRef = useRef()
 
-
+    useEffect(() => {
+        handleCloseModal()
+    }, [products])
+   
 return (
     <>
 <div className="table-title">
@@ -53,9 +57,9 @@ return (
             </tr>
         </thead>
          <tbody>
-                {console.log("currentObjects",currentProducts)}
-            {Object.values(currentProducts).map((product,index) => (
-               <Product key={product.id} product={product} loading={loading} index={index}/>
+            
+           {currentProducts.sort((a,b)=> (a.title < b.title ? -1 : 1)).map((product) => (
+               <Product key={product.id} product={product} loading={loading} />
                
             ))}
             

@@ -152,7 +152,7 @@ const AddForm = forwardRef((props, ref) => {
       
         
         <Form.Group>
-         <Form.Label style={{marginTop:"15px"}}>Rating</Form.Label> 
+        <div > <Form.Label style={{marginTop:"15px"}}>Rating</Form.Label> </div>
           {/* <Form.Control
           type = "text"
           name="rating"
