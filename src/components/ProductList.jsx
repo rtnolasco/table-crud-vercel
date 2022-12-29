@@ -65,14 +65,14 @@ return (
     {/* <ModalAdd show={show}/> */}
     <Modal show={show} onHide={handleCloseModal}dialogClassName="modal-90w">
         <Modal.Header closeButton>
+        <div className='modal-header-icon'></div>
             <Modal.Title>
                 
             </Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <AddForm ref={addFormRef} close={() => handleCloseModal()} />
-        </Modal.Body>
-        <Container style={{marginBottom:"10px"}}>
+            <Container style={{marginBottom:"10px"}}>
                     <Row>
                         <Col>
                             <Button onClick={handleCloseModal} className="btn-modal-cancel">Cancel</Button>
@@ -84,6 +84,8 @@ return (
                         </Col>
                     </Row>
             </Container>
+        </Modal.Body>
+       
         <Modal.Footer>
                 
         </Modal.Footer>

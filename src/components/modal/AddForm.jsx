@@ -71,19 +71,16 @@ const AddForm = forwardRef((props, ref) => {
         <Col>
         <Form.Group>
           <Form.Label>Image Link</Form.Label>
-        <Form.Control
-          type = "text"
-          name="image"
-          value = {image}
-          onChange = { (e) => onInputChange(e)}
-         
-          
-          >
-
-        </Form.Control>
+            <Form.Control
+              type = "text"
+              name="image"
+              value = {image}
+              onChange = { (e) => onInputChange(e)}
+              >
+            </Form.Control>
         </Form.Group>
-         
-          <Form.Group>
+        
+        <Form.Group>
           <Form.Label>Price</Form.Label>
             <Form.Control
                 type = "text"
@@ -96,31 +93,67 @@ const AddForm = forwardRef((props, ref) => {
         </Col>
       </Row>
         
-        <Form.Group>
+         <Form.Group>
           <Form.Label>Description</Form.Label>
-        <Form.Control
-          as = "textarea"
-          name="description"
-           value = {description}
-          onChange = { (e) => onInputChange(e)}
-         >
-        </Form.Control>
+            <Form.Control
+              as = "textarea"
+              name="description"
+              value = {description}
+              onChange = { (e) => onInputChange(e)}
+            >
+            </Form.Control>
         </Form.Group>
+
         <Form.Group>
           <Form.Label>Category</Form.Label>
-            <Form.Control
+            {/* <Form.Control
               type = "text"
               name="category"
               value = {category}
               onChange = { (e) => onInputChange(e)}
-              >
-            </Form.Control>
+              > */}
+                
+    
+        <div key="inline-checkbox"className="modal-category-wrap">
+          <Form.Check
+            inline
+            label="Jewelery"
+            name="group1"
+            type="checkbox"
+            id="inline-checkbox1"
+          />
+          <Form.Check
+            inline
+            label="Womens Clothing"
+            name="group1"
+            type="checkbox"
+            id="inline-checkbox2"
+          />
+          <Form.Check
+            inline
+            
+            label="Mens Clothing"
+            type="checkbox"
+            id="inline-checkbox3"
+          />
+          <Form.Check
+            inline
+            
+            label="Electronics"
+            type="checkbox"
+            id="inline-checkbox3"
+          />
+        </div>
+  
+    
+
+            {/* </Form.Control> */}
           </Form.Group> 
       
         
         <Form.Group>
-          <Form.Label>Rating</Form.Label>
-          <Form.Control
+         <Form.Label style={{marginTop:"15px"}}>Rating</Form.Label> 
+          {/* <Form.Control
           type = "text"
           name="rating"
           value = {rating}
@@ -130,7 +163,7 @@ const AddForm = forwardRef((props, ref) => {
           
           >
 
-        </Form.Control>
+        </Form.Control> */}
         
          <div style={{display:"flex"}}> <StarRating /> </div>
 

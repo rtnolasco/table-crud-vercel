@@ -10,8 +10,8 @@ export const TableRow = ({product, loading}) => {
                 {/* <td></td> */}
                 <td colSpan="2">{product.description}</td>
                     <td style={{display:"flex"}}><StarsRating /></td> 
-                <td></td>
-                <td></td>
+                <td>{product.rating.rate}</td>
+                <td>{product.rating.count}</td>
                 <td></td>
             </>
            

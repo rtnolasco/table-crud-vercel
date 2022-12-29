@@ -68,14 +68,59 @@ const EditForm = () => {
         </Form.Control>
         </Form.Group>
         <Form.Group>
-          <Form.Label>Category</Form.Label>
-            <Form.Control
+          
+            {/* <Form.Control
               type = "text"
               name="category"
            
               >
-            </Form.Control>
+            </Form.Control> */}
+            
+          <Form.Label>Category</Form.Label>
+            {/* <Form.Control
+              type = "text"
+              name="category"
+              value = {category}
+              onChange = { (e) => onInputChange(e)}
+              > */}
+                
+    
+        <div key="inline-checkbox" className="modal-category-wrap">
+          <Form.Check
+            inline
+            label="Jewelery"
+            name="group1"
+            type="checkbox"
+            id="inline-checkbox1"
+          />
+          <Form.Check
+            inline
+            label="Womens Clothing"
+            name="group1"
+            type="checkbox"
+            id="inline-checkbox2"
+          />
+          <Form.Check
+            inline
+            
+            label="Mens Clothing"
+            type="checkbox"
+            id="inline-checkbox3"
+          />
+          <Form.Check
+            inline
+            
+            label="Electronics"
+            type="checkbox"
+            id="inline-checkbox3"
+          />
+        </div>
+  
+    
+
+            {/* </Form.Control> */}
           </Form.Group> 
+        
       
         
         <Form.Group>

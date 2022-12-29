@@ -9,6 +9,8 @@ const ProductContextProvider = (props) => {
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(false)
 
+    
+
     //Getdata from fakestoreApi
 
     const fetchProducts = "https://fakestoreapi.com/products"
@@ -24,9 +26,9 @@ const ProductContextProvider = (props) => {
         fetchData()
     },[])
 
-    // const addProduct = (title, category, description, price, image ,rating) => {
-    //       setProducts (...products,{id:uuidv4(),title, category, description, price, image, rating})
-    //     }
+    const addProduct = (title, category, description, price, image ,rating) => {
+          setProducts (...products,{id:uuidv4(),title, category, description, price, image, rating})
+        }
 
     const deleteProduct = (id) => {
             setProducts(products.filter(products => products.id !== id))
@@ -34,7 +36,7 @@ const ProductContextProvider = (props) => {
     }
     
     return (
-        <ProductContext.Provider value={{products, loading,  deleteProduct}}>
+        <ProductContext.Provider value={{products, loading, addProduct,  deleteProduct}}>
             {props.children}
         </ProductContext.Provider>
     )

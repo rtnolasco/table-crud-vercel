@@ -16,17 +16,22 @@ const Product = ({product, loading, }) => {
     const {deleteProduct} = useContext(ProductContext)
     const {isOpen, toggle}= useOpenController(false)
 
-if (loading) {
-    return <td>Loading...</td>
-}
-    return (
-        
+    function currencyFormat(num) {
+        return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+     }
+
+        if (loading) {
+
+            return <tr><td>Loading...</td></tr>
+        }
+            return ( 
+
         <>
             <tr>
                 {/* <td>{product.id}</td>  */}
                 <td>{product.title}</td> 
                 <td>{product.category}</td> 
-                <td>${product.price}</td> 
+                <td>{currencyFormat(product.price)}</td> 
                 <td><img src={product.image} className="tbl-image"></img></td> 
                 <td style={{width:"130px"}}> 
                     <button onClick={handleShowModal} className="btn-edit" data-toggle="modal"> Edit </button> &nbsp;   
@@ -41,8 +46,7 @@ if (loading) {
                     <Modal.Body>
                         {/* <EditForm ref={addFormRef} close={() => handleCloseModal()} /> */}
                         <EditForm />
-                    </Modal.Body>
-                    <Container style={{marginBottom:"10px"}}>
+                        <Container style={{marginBottom:"10px"}}>
                                 <Row>
                                     <Col>
                                         <Button onClick={handleCloseModal} className="btn-modal-cancel">Cancel</Button>
@@ -55,6 +59,8 @@ if (loading) {
                                     </Col>
                                 </Row>
                         </Container>
+                    </Modal.Body>
+                   
                     <Modal.Footer>
                             
                     </Modal.Footer>
