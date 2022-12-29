@@ -91,7 +91,7 @@ const Product = ({product, loading }) => {
                                     <Button onClick={handleCloseDeleteModal} className="btn-modal-cancel">Cancel</Button>
                                 </Col>
                                 <Col>
-                                    <Button className="btn-modal-add">Delete</Button> 
+                                    <Button onClick={() => deleteProduct(product.id)} className="btn-modal-add">Delete</Button> 
                                 </Col>
                             </Row>
                         </Container>
