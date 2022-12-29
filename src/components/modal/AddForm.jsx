@@ -7,9 +7,20 @@ import ProductList from '../ProductList'
 
 const AddForm = forwardRef((props, ref) => {
   
-  const [imageValue, setImageValue] = useState("https://source.unsplash.com/user/c_v_r/100x100");
+  // const [imageValue, setImageValue] = useState("https://source.unsplash.com/user/c_v_r/100x100");
   const {addProduct} = useContext(ProductContext)
+ // checkbox values
 
+ const [checkValues, setValue] = useState([])
+ 
+ const handleChange = (event) => {
+  const {value, checked} = event.target
+    if (checked){
+      setValue(pre => [...pre,value])
+    }  
+   
+ }
+ console.log("checkedValues",checkValues)
 
 
   const [newProduct,setNewProduct] = useState({
@@ -106,49 +117,47 @@ const AddForm = forwardRef((props, ref) => {
 
         <Form.Group>
           <Form.Label>Category</Form.Label>
-            {/* <Form.Control
-              type = "text"
-              name="category"
-              value = {category}
-              onChange = { (e) => onInputChange(e)}
-              > */}
+       
+            <div key="inline-checkbox"className="modal-category-wrap">
+              <Form.Check
+                inline
+                label="Jewelery"
+                name="group1"
+                type="checkbox"
+                id="inline-checkbox1"
+                value="Jewelery"
+                onChange={handleChange}
+              />
+              <Form.Check
+                inline
+                label="Womens Clothing"
+                name="group1"
+                type="checkbox"
+                id="inline-checkbox2"
+                value="Womens Clothing"
+                onChange={handleChange}
+              />
+              <Form.Check
+                inline
+                name="group1"
+                label="Mens Clothing"
+                type="checkbox"
+                id="inline-checkbox3"
+                value="Mens Clothing"
+                onChange={handleChange}
                 
-    
-        <div key="inline-checkbox"className="modal-category-wrap">
-          <Form.Check
-            inline
-            label="Jewelery"
-            name="group1"
-            type="checkbox"
-            id="inline-checkbox1"
-          />
-          <Form.Check
-            inline
-            label="Womens Clothing"
-            name="group1"
-            type="checkbox"
-            id="inline-checkbox2"
-          />
-          <Form.Check
-            inline
-            
-            label="Mens Clothing"
-            type="checkbox"
-            id="inline-checkbox3"
-          />
-          <Form.Check
-            inline
-            
-            label="Electronics"
-            type="checkbox"
-            id="inline-checkbox3"
-          />
-        </div>
-  
-    
-
-            {/* </Form.Control> */}
-          </Form.Group> 
+              />
+              <Form.Check
+                inline
+                name="group1"
+                label="Electronics"
+                type="checkbox"
+                id="inline-checkbox3"
+                value="Electronics"
+                onChange={handleChange}
+              />
+            </div>
+           </Form.Group> 
       
         
         <Form.Group>

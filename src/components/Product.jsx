@@ -48,66 +48,47 @@ const Product = ({product, loading }) => {
                 <td>&#x20B1;{product.price}</td> 
                 <td><img src={product.image} className="tbl-image"></img></td> 
                 <td style={{width:"130px"}}> 
+
                     <button onClick={handleShowEditModal} className="btn-edit" data-toggle="modal1"> Edit </button> &nbsp;   
-                    {/* <button onClick={() => deleteProduct(product.id)} className="btn-edit" data-toggle="modal"> Delete </button> */}
                     <button onClick={handleShowDeleteModal}className="btn-edit" data-toggle="modal"> Delete </button>
                 </td> 
-                <Modal show={showEditModal} onHide={handleCloseEditModal}dialogClassName="modal-90w">
-                    <Modal.Header closeButton>
-                        <Modal.Title>
-                            
-                        </Modal.Title>
-                    </Modal.Header>
+            <ExpandButton isOpen={isOpen} toggle={toggle}/>
+            <Modal show={showEditModal} onHide={handleCloseEditModal}dialogClassName="modal-90w">
+                    <Modal.Header closeButton></Modal.Header>
                         <Modal.Body>
-                            <EditForm />
-                        <Container style={{marginBottom:"10px"}}>
-                            <Row>
-                                <Col>
-                                    <Button onClick={handleCloseEditModal} className="btn-modal-cancel">Cancel</Button>
-                                </Col>
-                                <Col>
-                                    <Button className="btn-modal-add">Add</Button> 
-                                </Col>
-                            </Row>
-                        </Container>
+                            <EditForm productsEdit={product}/>
+                                 <Container style={{marginBottom:"10px"}}>
+                                    <Row>
+                                        <Col>
+                                            <Button onClick={handleCloseEditModal} className="btn-modal-cancel">Cancel</Button>
+                                        </Col>
+                                        <Col>
+                                            <Button className="btn-modal-add">Add</Button> 
+                                        </Col>
+                                    </Row>
+                                </Container>
                         </Modal.Body>
-                   
-                    <Modal.Footer>
-                            
-                    </Modal.Footer>
                 </Modal>
 
                 <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}dialogClassName="modal-60w">
-                    <Modal.Header closeButton>
-                        <Modal.Title>
-                            
-                        </Modal.Title>
-                    </Modal.Header>
+                    <Modal.Header closeButton style={{backgroundImage:"unset"}}> </Modal.Header>
                         <Modal.Body>
                             <DeleteAlert productId = {[product.id]} productTitle={[product.title]}/>
-                        <Container style={{marginBottom:"10px"}}>
-                            <Row>
-                                <Col>
-                                    <Button onClick={handleCloseDeleteModal} className="btn-modal-cancel">Cancel</Button>
-                                </Col>
-                                <Col>
-                                    <Button onClick={() => deleteProduct(product.id)} className="btn-modal-add">Delete</Button> 
-                                </Col>
-                            </Row>
-                        </Container>
+                                <Container style={{marginBottom:"10px"}}>
+                                    <Row>
+                                        <Col>
+                                            <Button onClick={handleCloseDeleteModal} className="btn-modal-cancel">Cancel</Button>
+                                        </Col>
+                                        <Col>
+                                            <Button onClick={() => deleteProduct(product.id)} className="btn-modal-add">Delete</Button> 
+                                        </Col>
+                                    </Row>
+                                </Container>
                         </Modal.Body>
-                   
-                    <Modal.Footer>
-                            
-                    </Modal.Footer>
                 </Modal>
-
-                <ExpandButton isOpen={isOpen} toggle={toggle}/>
-                  
                
             </tr>
-            <tr>{isOpen && <TableRow product={product} />}
-            </tr>
+            <tr>{isOpen && <TableRow product={product} />}</tr>
                 </>
                     )
 }

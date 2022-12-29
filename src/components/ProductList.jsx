@@ -68,7 +68,7 @@ return (
 
     {/* <ModalAdd show={show}/> */}
     <Modal show={show} onHide={handleCloseModal}dialogClassName="modal-90w">
-        <Modal.Header closeButton>
+        <Modal.Header closeButton >
         <div className='modal-header-icon'></div>
             <Modal.Title>
                 

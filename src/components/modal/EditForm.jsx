@@ -1,9 +1,20 @@
-import React from 'react'
+import {React, useContext, useState} from 'react'
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import StarRating from '../StarsRating'
 import { ProductContext } from '../../context/ProductContext'
 
-const EditForm = () => {
+const EditForm = ({productsEdit}) => {
+
+  const id = productsEdit.id;
+  const {updateProduct} = useContext(ProductContext)
+
+  const [title,setTitle] = useState(productsEdit.title)
+  const [category,setCategory] = useState(productsEdit.category)
+  const [price,setPrice] = useState(productsEdit.price)
+  const [image,setImage] = useState(productsEdit.image)
+  const [description,setDescription] = useState(productsEdit.description)
+ 
+
   return (
     <Container>
     <Form >
@@ -26,6 +37,7 @@ const EditForm = () => {
             <Form.Control
               type = "text"
               name="title"
+              value={title}
             
               >
             </Form.Control>
@@ -38,6 +50,7 @@ const EditForm = () => {
         <Form.Control
           type = "text"
           name="image"
+          value={image}
        
          
           
@@ -51,6 +64,7 @@ const EditForm = () => {
             <Form.Control
                 type = "text"
                 name="price"
+                value={price}
               
               >
             </Form.Control>
@@ -63,6 +77,7 @@ const EditForm = () => {
         <Form.Control
           as = "textarea"
           name="description"
+          value={description}
         
          >
         </Form.Control>
@@ -77,21 +92,22 @@ const EditForm = () => {
             </Form.Control> */}
             
           <Form.Label>Category</Form.Label>
-            {/* <Form.Control
+            <Form.Control
               type = "text"
               name="category"
               value = {category}
-              onChange = { (e) => onInputChange(e)}
-              > */}
+              
+              >
                 
     
-        <div key="inline-checkbox" className="modal-category-wrap">
+        {/* <div key="inline-checkbox" className="modal-category-wrap">
           <Form.Check
             inline
             label="Jewelery"
             name="group1"
             type="checkbox"
             id="inline-checkbox1"
+            
           />
           <Form.Check
             inline
@@ -114,23 +130,20 @@ const EditForm = () => {
             type="checkbox"
             id="inline-checkbox3"
           />
-        </div>
+        </div> */}
   
     
 
-            {/* </Form.Control> */}
+            </Form.Control>
           </Form.Group> 
         
       
         
         <Form.Group>
           <Form.Label>Rating</Form.Label>
-          <Form.Control
-          type = "text"
-          name="rating"
-          >
+        
 
-        </Form.Control>
+      
         
          <div style={{display:"flex"}}> <StarRating /> </div>
 
