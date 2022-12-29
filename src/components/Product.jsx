@@ -16,6 +16,28 @@ const Product = ({product, loading, }) => {
     const {deleteProduct} = useContext(ProductContext)
     const {isOpen, toggle}= useOpenController(false)
 
+    const rowBackgroundColors = {
+        "men's clothing": "#F8D8C3", 
+        "women's clothing": "#D4F8D3",
+        "electronics": "#EDE7FB",
+        "jewelery": "#FBE7E9",
+
+      };
+      
+      const options = {
+        // ...
+        rowStyle: (rowData) => {
+          return {
+            backgroundColor: rowBackgroundColors[rowData.priority] ?? "#fff",
+          };
+        },
+        // ...
+      };
+      
+    let {catColor} = [product.category];
+    console.log("catColor",catColor)
+
+
     function currencyFormat(num) {
         return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
      }
@@ -28,10 +50,10 @@ const Product = ({product, loading, }) => {
 
         <>
             <tr>
-                {/* <td>{product.id}</td>  */}
+                <td>{product.id}</td> 
                 <td>{product.title}</td> 
-                <td>{product.category}</td> 
-                <td>{currencyFormat(product.price)}</td> 
+                <td ><div style={{lineHeight:"1.20rem",borderRadius:"8px", backgroundColor: rowBackgroundColors[product.category] ?? "transparent"}}>{product.category}</div> </td> 
+                <td style={{}}>{currencyFormat(product.price)}</td> 
                 <td><img src={product.image} className="tbl-image"></img></td> 
                 <td style={{width:"130px"}}> 
                     <button onClick={handleShowModal} className="btn-edit" data-toggle="modal"> Edit </button> &nbsp;   

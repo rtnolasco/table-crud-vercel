@@ -43,7 +43,7 @@ return (
      <table className="table-striped table-hover" style={{width: "1066px"}}>
         <thead>
             <tr>
-                {/* <th>ID</th> */}
+                <th>ID</th>
                 <th>Title</th>
                 <th>Category</th>
                 <th>Price</th>
