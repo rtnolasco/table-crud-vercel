@@ -58,7 +58,7 @@ return (
         </thead>
          <tbody>
             
-           {currentProducts.sort((a,b)=> (a.title < b.title ? -1 : 1)).map((product) => (
+           {currentProducts.map((product) => (
                <Product key={product.id} product={product} loading={loading} />
                
             ))}
