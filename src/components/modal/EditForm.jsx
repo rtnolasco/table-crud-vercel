@@ -1,9 +1,9 @@
-import {React, useContext, useState} from 'react'
+import {React, useContext, useState,forwardRef, useImperativeHandle} from 'react'
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import StarRating from '../StarsRating'
 import { ProductContext } from '../../context/ProductContext'
 
-const EditForm = ({productsEdit}) => {
+const EditForm = forwardRef(({productsEdit}, ref) => {
 
   const id = productsEdit.id;
   const {updateProduct} = useContext(ProductContext)
@@ -14,10 +14,24 @@ const EditForm = ({productsEdit}) => {
   const [image,setImage] = useState(productsEdit.image)
   const [description,setDescription] = useState(productsEdit.description)
  
+  const updatedProduct = {id,title,category,price,image,description}
+
+  const handleSubmit = (e) => {
+    // e.preventDefault();
+    updateProduct(id,updatedProduct)
+  }
+
+  useImperativeHandle(ref, () => ({
+    callhandleSubmit() {
+      handleSubmit()
+     
+    }
+
+  }))
 
   return (
     <Container>
-    <Form >
+    <Form on onSubmit={handleSubmit}>
       <Row>
         <Col>
           <Form.Group>
@@ -38,7 +52,7 @@ const EditForm = ({productsEdit}) => {
               type = "text"
               name="title"
               value={title}
-              onChange = { (e) => onInputChange(e)}
+              onChange = { (e) => setTitle(e.target.value)}
             
               >
             </Form.Control>
@@ -52,7 +66,7 @@ const EditForm = ({productsEdit}) => {
           type = "text"
           name="image"
           value={image}
-          onChange = { (e) => onInputChange(e)}
+          onChange = { (e) => setImage(e.target.value)}
        
          
           
@@ -67,7 +81,7 @@ const EditForm = ({productsEdit}) => {
                 type = "text"
                 name="price"
                 value={price}
-                onChange = { (e) => onInputChange(e)}
+                onChange = { (e) => setPrice(e.target.value)}
               
               >
             </Form.Control>
@@ -81,7 +95,7 @@ const EditForm = ({productsEdit}) => {
           as = "textarea"
           name="description"
           value={description}
-          onChange = { (e) => onInputChange(e)}
+          onChange = { (e) => setDescription(e.target.value)}
         
          >
         </Form.Control>
@@ -100,7 +114,7 @@ const EditForm = ({productsEdit}) => {
               type = "text"
               name="category"
               value = {category}
-              onChange = { (e) => onInputChange(e)}
+              onChange = { (e) => setCategory(e.target.value)}
               >
                 
     
@@ -159,6 +173,6 @@ const EditForm = ({productsEdit}) => {
     </Form>
     </Container>
   )
-}
+})
 
 export default EditForm

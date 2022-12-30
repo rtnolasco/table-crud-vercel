@@ -1,4 +1,4 @@
-import {React, useContext, useState} from 'react'
+import {React, useContext, useState, useEffect, useRef} from 'react'
 import { Modal, Form, Button, Container, Row, Col } from 'react-bootstrap'
 import { TableRow } from './TableRow';
 import { ExpandButton } from './ExpandButton';
@@ -29,6 +29,12 @@ const Product = ({product, loading }) => {
 
       };
       
+      useEffect(() => {
+        handleCloseEditModal()
+    }, [product])
+
+    // handle child to parent
+    const editFormRef = useRef()
 
     // function currencyFormat(num) {
     //     return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
@@ -56,14 +62,14 @@ const Product = ({product, loading }) => {
             <Modal show={showEditModal} onHide={handleCloseEditModal}dialogClassName="modal-90w">
                     <Modal.Header closeButton></Modal.Header>
                         <Modal.Body>
-                            <EditForm productsEdit={product}/>
+                            <EditForm ref={editFormRef} close={() => handleCloseModal()} productsEdit={product}/>
                                  <Container style={{marginBottom:"10px"}}>
                                     <Row>
                                         <Col>
                                             <Button onClick={handleCloseEditModal} className="btn-modal-cancel">Cancel</Button>
                                         </Col>
                                         <Col>
-                                            <Button className="btn-modal-add">Add</Button> 
+                                            <Button onClick={()=>editFormRef.current.callhandleSubmit()}className="btn-modal-add">Edit</Button> 
                                         </Col>
                                     </Row>
                                 </Container>
