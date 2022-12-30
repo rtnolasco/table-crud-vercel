@@ -35,12 +35,11 @@ useEffect(() => {
 },[])
 
 const handleChange = (e) => {
-  const {name, checked} = e.target.value;
+  const {name, checked} = e.target;
   let tempCategory = categories.map((category) => 
     category.name === name ? { ...category, isChecked: checked} : category
   )
-  console.log('value', tempCategory)
- tempCategory(tempCategory)
+ setCategory(tempCategory)
 }
 
   const [newProduct,setNewProduct] = useState({
@@ -143,8 +142,8 @@ const handleChange = (e) => {
              inline
              label={categories.label}
              name={categories.name}
-             checked = {category?.isChecked || true}
-             
+             checked = {category?.isChecked || false}
+             value={category.name}
              onChange = {handleChange}
              type="checkbox"
              id="inline-checkbox1"

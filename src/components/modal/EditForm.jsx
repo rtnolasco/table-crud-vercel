@@ -38,6 +38,7 @@ const EditForm = ({productsEdit}) => {
               type = "text"
               name="title"
               value={title}
+              onChange = { (e) => onInputChange(e)}
             
               >
             </Form.Control>
@@ -51,6 +52,7 @@ const EditForm = ({productsEdit}) => {
           type = "text"
           name="image"
           value={image}
+          onChange = { (e) => onInputChange(e)}
        
          
           
@@ -65,6 +67,7 @@ const EditForm = ({productsEdit}) => {
                 type = "text"
                 name="price"
                 value={price}
+                onChange = { (e) => onInputChange(e)}
               
               >
             </Form.Control>
@@ -78,6 +81,7 @@ const EditForm = ({productsEdit}) => {
           as = "textarea"
           name="description"
           value={description}
+          onChange = { (e) => onInputChange(e)}
         
          >
         </Form.Control>
@@ -92,18 +96,14 @@ const EditForm = ({productsEdit}) => {
             </Form.Control> */}
             
           <Form.Label>Category</Form.Label>
-          <Form.Control>
-          <div key="inline-checkbox" className="modal-category-wrap">
-            <Form.Check
+            <Form.Control
               type = "text"
               name="category"
               value = {category}
-              style={{marginTop:"15px"}}
+              onChange = { (e) => onInputChange(e)}
               >
-            </Form.Check>
-            
-             </div>   
-             </Form.Control>
+                
+    
         {/* <div key="inline-checkbox" className="modal-category-wrap">
           <Form.Check
             inline
@@ -138,7 +138,7 @@ const EditForm = ({productsEdit}) => {
   
     
 
-            
+            </Form.Control>
           </Form.Group> 
         
       
