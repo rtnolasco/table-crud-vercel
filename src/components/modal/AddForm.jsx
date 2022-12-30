@@ -138,10 +138,10 @@ const handleChange = (e) => {
           <Form.Control
               type = "text"
               name="category"
-              defaultValue = {categoryInfo.category}
+              value={categoryInfo.category}
               onChange = { (e) => onInputChange(e)}
             >
-            </Form.Control>
+          </Form.Control>
         
             <div key="inline-checkbox"className="modal-category-wrap">
               <Form.Check
