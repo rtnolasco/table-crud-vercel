@@ -1,4 +1,4 @@
-import { useContext, useState, forwardRef, useImperativeHandle } from 'react'
+import { useContext, useState, forwardRef, useImperativeHandle, useEffect } from 'react'
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import StarRating from '../StarsRating'
 import { ProductContext } from '../../context/ProductContext'
@@ -11,17 +11,37 @@ const AddForm = forwardRef((props, ref) => {
   const {addProduct} = useContext(ProductContext)
  // checkbox values
 
- const [checkValues, setValue] = useState([])
+ const categoryData = [{
+  name: "Men's Clothing" , 
+  label:"Men's Clothing"
+}, 
+{
+  name: "Women's Clothing",  
+  label:"Women's Clothing"
+}, 
+{
+  name: "Jewelry", 
+  label:"Jewelry"
+},
+{
+  name: "Electronics", 
+  label:"Electronics"
+}]
  
- const handleChange = (event) => {
-  const {value, checked} = event.target
-    if (checked){
-      setValue(pre => [...pre,value])
-    }  
-   
- }
- console.log("checkedValues",checkValues)
+const [categories, setCategory] = useState([])
 
+useEffect(() => {
+  setCategory(categoryData)
+},[])
+
+const handleChange = (e) => {
+  const {name, checked} = e.target.value;
+  let tempCategory = categories.map((category) => 
+    category.name === name ? { ...category, isChecked: checked} : category
+  )
+  console.log('value', tempCategory)
+ tempCategory(tempCategory)
+}
 
   const [newProduct,setNewProduct] = useState({
     title:"",category:"", description:"", price:"",image:"",rating:""
@@ -117,15 +137,29 @@ const AddForm = forwardRef((props, ref) => {
 
         <Form.Group>
           <Form.Label>Category</Form.Label>
-       
-            <div key="inline-checkbox"className="modal-category-wrap">
+          {categories.map((categories)=> (
+             <Form.Check
+             key={categories.name}
+             inline
+             label={categories.label}
+             name={categories.name}
+             checked = {category?.isChecked || true}
+             
+             onChange = {handleChange}
+             type="checkbox"
+             id="inline-checkbox1"
+             
+            //  onChange={handleChange}
+           />
+          ))}
+            {/* <div key="inline-checkbox"className="modal-category-wrap">
               <Form.Check
                 inline
                 label="Jewelery"
                 name="group1"
                 type="checkbox"
                 id="inline-checkbox1"
-                value="Jewelery"
+                value={value}
                 onChange={handleChange}
               />
               <Form.Check
@@ -134,7 +168,7 @@ const AddForm = forwardRef((props, ref) => {
                 name="group1"
                 type="checkbox"
                 id="inline-checkbox2"
-                value="Womens Clothing"
+                value={value}
                 onChange={handleChange}
               />
               <Form.Check
@@ -143,7 +177,7 @@ const AddForm = forwardRef((props, ref) => {
                 label="Mens Clothing"
                 type="checkbox"
                 id="inline-checkbox3"
-                value="Mens Clothing"
+                value={value}
                 onChange={handleChange}
                 
               />
@@ -156,7 +190,7 @@ const AddForm = forwardRef((props, ref) => {
                 value="Electronics"
                 onChange={handleChange}
               />
-            </div>
+            </div> */}
            </Form.Group> 
       
         

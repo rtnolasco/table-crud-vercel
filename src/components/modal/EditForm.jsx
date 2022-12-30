@@ -92,14 +92,18 @@ const EditForm = ({productsEdit}) => {
             </Form.Control> */}
             
           <Form.Label>Category</Form.Label>
-            <Form.Control
+          <Form.Control>
+          <div key="inline-checkbox" className="modal-category-wrap">
+            <Form.Check
               type = "text"
               name="category"
               value = {category}
-              
+              style={{marginTop:"15px"}}
               >
-                
-    
+            </Form.Check>
+            
+             </div>   
+             </Form.Control>
         {/* <div key="inline-checkbox" className="modal-category-wrap">
           <Form.Check
             inline
@@ -134,7 +138,7 @@ const EditForm = ({productsEdit}) => {
   
     
 
-            </Form.Control>
+            
           </Form.Group> 
         
       
