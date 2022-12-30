@@ -7,40 +7,40 @@ import ProductList from '../ProductList'
 
 const AddForm = forwardRef((props, ref) => {
   
-  // const [imageValue, setImageValue] = useState("https://source.unsplash.com/user/c_v_r/100x100");
+  
   const {addProduct} = useContext(ProductContext)
- // checkbox values
 
- const categoryData = [{
-  name: "Men's Clothing" , 
-  label:"Men's Clothing"
-}, 
-{
-  name: "Women's Clothing",  
-  label:"Women's Clothing"
-}, 
-{
-  name: "Jewelry", 
-  label:"Jewelry"
-},
-{
-  name: "Electronics", 
-  label:"Electronics"
-}]
- 
-const [categories, setCategory] = useState([])
 
-useEffect(() => {
-  setCategory(categoryData)
-},[])
+
+const [categoryInfo, setcategoryInfo] = useState({
+  category1: [],
+  category: [],
+});
 
 const handleChange = (e) => {
-  const {name, checked} = e.target;
-  let tempCategory = categories.map((category) => 
-    category.name === name ? { ...category, isChecked: checked} : category
-  )
- setCategory(tempCategory)
-}
+  // Destructuring
+  const { value, checked } = e.target;
+  const { category1 } = categoryInfo;
+    
+  console.log(`${value} is ${checked}`);
+   
+  // Case 1 : The user checks the box
+  if (checked) {
+    setcategoryInfo({
+      category1: [...category1, value],
+      category: [...category1, value],
+    });
+  }
+
+  // Case 2  : The user unchecks the box
+  else {
+    setcategoryInfo({
+      category1: category1.filter((e) => e !== value),
+      category: category1.filter((e) => e !== value),
+    });
+  }
+};
+
 
   const [newProduct,setNewProduct] = useState({
     title:"",category:"", description:"", price:"",image:"",rating:""
@@ -51,14 +51,13 @@ const handleChange = (e) => {
   ]
 
   const {title,category,description,price,image,rating} = newProduct
-  
 
 
   const handleSubmit = (e) => {
     // e.preventDefault();
-    // console.log(title,category,description,price,image,rating)
-    
+    // const category = value
     addProduct(title,category,description,price,image,rating)
+    
   }
 
   useImperativeHandle(ref, () => ({
@@ -136,60 +135,53 @@ const handleChange = (e) => {
 
         <Form.Group>
           <Form.Label>Category</Form.Label>
-          {categories.map((categories)=> (
-             <Form.Check
-             key={categories.name}
-             inline
-             label={categories.label}
-             name={categories.name}
-             checked = {category?.isChecked || false}
-             value={category.name}
-             onChange = {handleChange}
-             type="checkbox"
-             id="inline-checkbox1"
-             
-            //  onChange={handleChange}
-           />
-          ))}
-            {/* <div key="inline-checkbox"className="modal-category-wrap">
+          <Form.Control
+              type = "text"
+              name="category"
+              defaultValue = {categoryInfo.category}
+              onChange = { (e) => onInputChange(e)}
+            >
+            </Form.Control>
+        
+            <div key="inline-checkbox"className="modal-category-wrap">
               <Form.Check
                 inline
                 label="Jewelery"
-                name="group1"
+                name="category1"
                 type="checkbox"
                 id="inline-checkbox1"
-                value={value}
+                value="jewelery"
                 onChange={handleChange}
               />
               <Form.Check
                 inline
                 label="Womens Clothing"
-                name="group1"
+                name="category1"
                 type="checkbox"
                 id="inline-checkbox2"
-                value={value}
+                value="women's clothing"
                 onChange={handleChange}
               />
               <Form.Check
                 inline
-                name="group1"
+                name="category1"
                 label="Mens Clothing"
                 type="checkbox"
                 id="inline-checkbox3"
-                value={value}
+                value="men's clothing"
                 onChange={handleChange}
                 
               />
               <Form.Check
                 inline
-                name="group1"
+                name="category1"
                 label="Electronics"
                 type="checkbox"
                 id="inline-checkbox3"
-                value="Electronics"
+                value="electronics"
                 onChange={handleChange}
               />
-            </div> */}
+            </div>
            </Form.Group> 
       
         

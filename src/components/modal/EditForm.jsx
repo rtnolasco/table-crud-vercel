@@ -3,6 +3,7 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import StarRating from '../StarsRating'
 import { ProductContext } from '../../context/ProductContext'
 
+
 const EditForm = forwardRef(({productsEdit}, ref) => {
 
   const id = productsEdit.id;
@@ -13,12 +14,24 @@ const EditForm = forwardRef(({productsEdit}, ref) => {
   const [price,setPrice] = useState(productsEdit.price)
   const [image,setImage] = useState(productsEdit.image)
   const [description,setDescription] = useState(productsEdit.description)
+
+ 
+
+  //Vlaue State
+  // const [formValue, setFormValue] = useState({
+  //   title: "",
+  //   category: "",
+  //   price: "",
+  //   image: "",
+  //   description: ""
+  // });
  
   const updatedProduct = {id,title,category,price,image,description}
-
+//<form onSubmit={(e) => handleSubmit(e, sendprop)}>
   const handleSubmit = (e) => {
     // e.preventDefault();
     updateProduct(id,updatedProduct)
+    
   }
 
   useImperativeHandle(ref, () => ({
@@ -29,9 +42,15 @@ const EditForm = forwardRef(({productsEdit}, ref) => {
 
   }))
 
+
+//  const handleOnChange = (e) = {
+
+
+//  }
+
   return (
     <Container>
-    <Form on onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <Row>
         <Col>
           <Form.Group>
@@ -103,22 +122,23 @@ const EditForm = forwardRef(({productsEdit}, ref) => {
         <Form.Group>
           
             {/* <Form.Control
-              type = "text"
+              type = "hidden"
               name="category"
+              value="Electronics"
            
               >
             </Form.Control> */}
             
           <Form.Label>Category</Form.Label>
-            <Form.Control
+            {/* <Form.Control
               type = "text"
               name="category"
               value = {category}
               onChange = { (e) => setCategory(e.target.value)}
-              >
+              > */}
                 
     
-        {/* <div key="inline-checkbox" className="modal-category-wrap">
+        <div key="inline-checkbox" className="modal-category-wrap">
           <Form.Check
             inline
             label="Jewelery"
@@ -148,11 +168,11 @@ const EditForm = forwardRef(({productsEdit}, ref) => {
             type="checkbox"
             id="inline-checkbox3"
           />
-        </div> */}
+        </div>
   
     
 
-            </Form.Control>
+            {/* </Form.Control> */}
           </Form.Group> 
         
       
