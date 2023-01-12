@@ -1,193 +1,147 @@
-import { useContext, useState, forwardRef, useImperativeHandle, useEffect } from 'react'
-import { Form, Button, Container, Row, Col } from 'react-bootstrap'
-import StarRating from '../StarsRating'
-import { ProductContext } from '../../context/ProductContext'
-
-import ProductList from '../ProductList'
+import { useContext, useState, forwardRef, useImperativeHandle, useEffect } from 'react';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import StarRating from '../StarsRating';
+import { ProductContext } from '../../context/ProductContext';
 
 const AddForm = forwardRef((props, ref) => {
-  
-  
-  const {addProduct} = useContext(ProductContext)
+	const { addProduct } = useContext(ProductContext);
 
+	const [newProduct, setNewProduct] = useState({
+		title: '',
+		category: [],
+		description: '',
+		price: '',
+		image: '',
+		rating: '',
+	});
 
+	const onInputChange = (event) => {
+		if (event.target.name === 'category') {
+			let copy = { ...newProduct };
+			if (event.target.checked) {
+				copy.category.push(event.target.value);
+			} else {
+				copy.category = copy.category.filter((el) => el != event.target.value);
+			}
 
-const [categoryInfo, setcategoryInfo] = useState({
-  category1: [],
-  category: [],
-});
+			setNewProduct(copy);
+		} else {
+			setNewProduct(() => ({
+				...newProduct,
+				[event.target.name]: event.target.value,
+			}));
+		}
+	};
 
-const handleChange = (e) => {
-  // Destructuring
-  const { value, checked } = e.target;
-  const { category1 } = categoryInfo;
-    
-  console.log(`${value} is ${checked}`);
-   
-  // Case 1 : The user checks the box
-  if (checked) {
-    setcategoryInfo({
-      category1: [...category1, value],
-      category: [...category1, value],
-    });
-  }
+	const { title, category, description, price, image, rating } = newProduct;
 
-  // Case 2  : The user unchecks the box
-  else {
-    setcategoryInfo({
-      category1: category1.filter((e) => e !== value),
-      category: category1.filter((e) => e !== value),
-    });
-  }
-};
+	const handleSubmit = (e) => {
+		// console.log('formData', newProduct);
+		// e.preventDefault();
+		addProduct(title, category, description, price, image, rating);
+	};
 
+	useImperativeHandle(ref, () => ({
+		callhandleSubmit() {
+			handleSubmit();
+		},
+	}));
 
-  const [newProduct,setNewProduct] = useState({
-    title:"",category:"", description:"", price:"",image:"",rating:""
-  })
+	// useEffect(() => {
+	// 	setcategoryInfo(category);
+	// }, []);
 
-  const onInputChange = (e) => [
-    setNewProduct({...newProduct,[e.target.name]: e.target.value})
-  ]
+	return (
+		<Container>
+			<Form onSubmit={handleSubmit}>
+				<Row>
+					<Col>
+						<Form.Group>
+							<Form.Label>ID</Form.Label>
+							<Form.Control type="text" name="id" disabled></Form.Control>
+						</Form.Group>
 
-  const {title,category,description,price,image,rating} = newProduct
+						<Form.Group>
+							<Form.Label>Title</Form.Label>
+							<Form.Control type="text" name="title" onChange={onInputChange} required></Form.Control>
+						</Form.Group>
+					</Col>
 
+					<Col>
+						<Form.Group>
+							<Form.Label>Image Link</Form.Label>
+							<Form.Control type="text" name="image" onChange={onInputChange}></Form.Control>
+						</Form.Group>
 
-  const handleSubmit = (e) => {
-    // e.preventDefault();
-    // const category = value
-    addProduct(title,category,description,price,image,rating)
-    
-  }
+						<Form.Group>
+							<Form.Label>Price</Form.Label>
+							<Form.Control type="text" name="price" onChange={onInputChange} required></Form.Control>
+						</Form.Group>
+					</Col>
+				</Row>
 
-  useImperativeHandle(ref, () => ({
-    callhandleSubmit() {
-      handleSubmit()
-     
-    }
+				<Form.Group>
+					<Form.Label>Description</Form.Label>
+					<Form.Control as="textarea" name="description" onChange={onInputChange}></Form.Control>
+				</Form.Group>
 
-  }))
-  return (
-    <Container>
-    <Form onSubmit={handleSubmit}>
-      <Row>
-        <Col>
-          <Form.Group>
-          <Form.Label>ID</Form.Label>
-            <Form.Control
-              type = "text"
-              name="id"
-              
-              disabled
-              >
-            </Form.Control>
-          </Form.Group>
+				<Form.Group>
+					<Form.Label>Category</Form.Label>
+					{/* <Form.Control
+						id="category"
+						type="text"
+						name="category"
+						value={categoryInfo.category}
+						onChange={onInputChange}
+						// onChange={handleChange}
+					></Form.Control> */}
 
-      
-         <Form.Group>
-         <Form.Label>Title</Form.Label>
-            <Form.Control
-              type = "text"
-              name="title"
-              value = {title}
-              onChange = { (e) => onInputChange(e)}
-              required
-              >
-            </Form.Control>
-          </Form.Group>
-        </Col>
-        
-        <Col>
-        <Form.Group>
-          <Form.Label>Image Link</Form.Label>
-            <Form.Control
-              type = "text"
-              name="image"
-              value = {image}
-              onChange = { (e) => onInputChange(e)}
-              >
-            </Form.Control>
-        </Form.Group>
-        
-        <Form.Group>
-          <Form.Label>Price</Form.Label>
-            <Form.Control
-                type = "text"
-                name="price"
-                value = {price}
-                onChange = { (e) => onInputChange(e)}
-              >
-            </Form.Control>
-          </Form.Group>  
-        </Col>
-      </Row>
-        
-         <Form.Group>
-          <Form.Label>Description</Form.Label>
-            <Form.Control
-              as = "textarea"
-              name="description"
-              value = {description}
-              onChange = { (e) => onInputChange(e)}
-            >
-            </Form.Control>
-        </Form.Group>
+					<div key="inline-checkbox" className="modal-category-wrap">
+						<Form.Check
+							inline
+							label="Jewelery"
+							name="category"
+							type="checkbox"
+							id="inline-checkbox1"
+							value="jewelery"
+							onChange={onInputChange}
+						/>
+						<Form.Check
+							inline
+							label="Women's Clothing"
+							name="category"
+							type="checkbox"
+							id="inline-checkbox2"
+							value="women's clothing"
+							onChange={onInputChange}
+						/>
+						<Form.Check
+							inline
+							name="category"
+							label="Mens Clothing"
+							type="checkbox"
+							id="inline-checkbox3"
+							value="men's clothing"
+							onChange={onInputChange}
+						/>
+						<Form.Check
+							inline
+							name="category"
+							label="Electronics"
+							type="checkbox"
+							id="inline-checkbox3"
+							value="electronics"
+							onChange={onInputChange}
+						/>
+					</div>
+				</Form.Group>
 
-        <Form.Group>
-          <Form.Label>Category</Form.Label>
-          <Form.Control
-              type = "text"
-              name="category"
-              value={categoryInfo.category}
-              onChange = { (e) => onInputChange(e)}
-            >
-          </Form.Control>
-        
-            <div key="inline-checkbox"className="modal-category-wrap">
-              <Form.Check
-                inline
-                label="Jewelery"
-                name="category1"
-                type="checkbox"
-                id="inline-checkbox1"
-                value="jewelery"
-                onChange={handleChange}
-              />
-              <Form.Check
-                inline
-                label="Womens Clothing"
-                name="category1"
-                type="checkbox"
-                id="inline-checkbox2"
-                value="women's clothing"
-                onChange={handleChange}
-              />
-              <Form.Check
-                inline
-                name="category1"
-                label="Mens Clothing"
-                type="checkbox"
-                id="inline-checkbox3"
-                value="men's clothing"
-                onChange={handleChange}
-                
-              />
-              <Form.Check
-                inline
-                name="category1"
-                label="Electronics"
-                type="checkbox"
-                id="inline-checkbox3"
-                value="electronics"
-                onChange={handleChange}
-              />
-            </div>
-           </Form.Group> 
-      
-        
-        <Form.Group>
-        <div > <Form.Label style={{marginTop:"15px"}}>Rating</Form.Label> </div>
-          {/* <Form.Control
+				<Form.Group>
+					<div>
+						{' '}
+						<Form.Label style={{ marginTop: '15px' }}>Rating</Form.Label>{' '}
+					</div>
+					{/* <Form.Control
           type = "text"
           name="rating"
           value = {rating}
@@ -198,17 +152,17 @@ const handleChange = (e) => {
           >
 
         </Form.Control> */}
-        
-         <div style={{display:"flex"}}> <StarRating /> </div>
 
-        
-      </Form.Group>
-    {/* <Button variant="succes" type="submit" >Add new product</Button>  
+					<div style={{ display: 'flex' }}>
+						{' '}
+						<StarRating />{' '}
+					</div>
+				</Form.Group>
+				{/* <Button variant="succes" type="submit" >Add new product</Button>  
     <Button onClick={() => props.close()}>close</Button> */}
-      
-    </Form>
-    </Container>
-  )
-})
+			</Form>
+		</Container>
+	);
+});
 
-export default AddForm
+export default AddForm;
