@@ -14,20 +14,10 @@ const EditForm = forwardRef(({ productsEdit }, ref) => {
 	const [description, setDescription] = useState(productsEdit.description);
 
 	const handleChangeCheckbox = (e) => {
-		// const { value, checked } = e.target;
-		console.log('value', e.target.value);
-		console.log('catgegoryf', category);
 		if (e.target.name === 'category') {
-			// let copy = { ...category };
-
 			if (e.target.checked) {
 				category.push(e.target.value);
 			}
-			//  else {
-			// 		copy.category = copy.category.filter((el) => el != e.target.value);
-			// 	}
-			// 	setCategory(copy);
-			console.log('catgegor2', category);
 		} else {
 			setCategory(() => ({
 				...category,
@@ -39,7 +29,6 @@ const EditForm = forwardRef(({ productsEdit }, ref) => {
 	const updatedProduct = { id, title, category, price, image, description };
 
 	const handleSubmit = (e) => {
-		// e.preventDefault();
 		updateProduct(id, updatedProduct);
 	};
 
@@ -48,40 +37,6 @@ const EditForm = forwardRef(({ productsEdit }, ref) => {
 			handleSubmit();
 		},
 	}));
-
-	//  const handleOnChange = (e) = {
-
-	//  }
-
-	// const [categoryInfo, setcategoryInfo] = useState({
-	// 	cat1: [],
-	// 	category: [],
-	// });
-
-	// const handleCheckBox = (e) => {
-	// 	// Destructuring
-	// 	const { value, checked } = e.target;
-	// 	const { cat1 } = categoryInfo;
-
-	// 	console.log(`${value} is ${checked}`);
-
-	// 	// Case 1 : The user checks the box
-	// 	if (checked) {
-	// 		setcategoryInfo({
-	// 			cat1: [...cat1, value],
-	// 			category: [...cat1, value],
-	// 		});
-	// 		console.log('value', cat1);
-	// 	}
-
-	// 	// Case 2  : The user unchecks the box
-	// 	else {
-	// 		setcategoryInfo({
-	// 			cat1: cat1.filter((e) => e !== value),
-	// 			category: cat1.filter((e) => e !== value),
-	// 		});
-	// 	}
-	// };
 
 	return (
 		<Container>
@@ -146,12 +101,6 @@ const EditForm = forwardRef(({ productsEdit }, ref) => {
             </Form.Control> */}
 
 					<Form.Label>Category</Form.Label>
-					{/* <Form.Control
-						type="text"
-						name="category"
-						value={category}
-						onChange={(e) => setCategory(e.target.value)}
-					></Form.Control> */}
 
 					<div key="inline-checkbox" className="modal-category-wrap">
 						<Form.Check
@@ -201,8 +150,6 @@ const EditForm = forwardRef(({ productsEdit }, ref) => {
 						<StarRating />{' '}
 					</div>
 				</Form.Group>
-				{/* <Button variant="succes" type="submit" >Add new product</Button>  
-    <Button onClick={() => props.close()}>close</Button> */}
 			</Form>
 		</Container>
 	);
