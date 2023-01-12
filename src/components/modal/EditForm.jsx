@@ -92,14 +92,6 @@ const EditForm = forwardRef(({ productsEdit }, ref) => {
 					></Form.Control>
 				</Form.Group>
 				<Form.Group>
-					{/* <Form.Control
-              type = "hidden"
-              name="category"
-              value="Electronics"
-           
-              >
-            </Form.Control> */}
-
 					<Form.Label>Category</Form.Label>
 
 					<div key="inline-checkbox" className="modal-category-wrap">
