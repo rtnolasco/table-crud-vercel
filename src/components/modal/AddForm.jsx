@@ -36,8 +36,6 @@ const AddForm = forwardRef((props, ref) => {
 	const { title, category, description, price, image, rating } = newProduct;
 
 	const handleSubmit = (e) => {
-		// console.log('formData', newProduct);
-		// e.preventDefault();
 		addProduct(title, category, description, price, image, rating);
 	};
 
@@ -46,10 +44,6 @@ const AddForm = forwardRef((props, ref) => {
 			handleSubmit();
 		},
 	}));
-
-	// useEffect(() => {
-	// 	setcategoryInfo(category);
-	// }, []);
 
 	return (
 		<Container>
@@ -87,14 +81,6 @@ const AddForm = forwardRef((props, ref) => {
 
 				<Form.Group>
 					<Form.Label>Category</Form.Label>
-					{/* <Form.Control
-						id="category"
-						type="text"
-						name="category"
-						value={categoryInfo.category}
-						onChange={onInputChange}
-						// onChange={handleChange}
-					></Form.Control> */}
 
 					<div key="inline-checkbox" className="modal-category-wrap">
 						<Form.Check
@@ -141,25 +127,12 @@ const AddForm = forwardRef((props, ref) => {
 						{' '}
 						<Form.Label style={{ marginTop: '15px' }}>Rating</Form.Label>{' '}
 					</div>
-					{/* <Form.Control
-          type = "text"
-          name="rating"
-          value = {rating}
-          onChange = { (e) => onInputChange(e)}
-          
-         
-          
-          >
-
-        </Form.Control> */}
 
 					<div style={{ display: 'flex' }}>
 						{' '}
 						<StarRating />{' '}
 					</div>
 				</Form.Group>
-				{/* <Button variant="succes" type="submit" >Add new product</Button>  
-    <Button onClick={() => props.close()}>close</Button> */}
 			</Form>
 		</Container>
 	);
