@@ -375,3 +375,8 @@ polygon {
 .rating {
 	height: 2rem;
 }
+
+.star {
+	cursor: pointer;
+	transition: color 200ms;
+}

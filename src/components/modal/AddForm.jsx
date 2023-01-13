@@ -2,9 +2,17 @@ import { useContext, useState, forwardRef, useImperativeHandle, useEffect } from
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import StarRating from '../StarsRating';
 import { ProductContext } from '../../context/ProductContext';
+import Star from '../Star';
 
 const AddForm = forwardRef((props, ref) => {
+	// const { products, loading } = useContext(ProductContext);
 	const { addProduct } = useContext(ProductContext);
+
+	const [ratingValue, setratingValue] = useState('');
+
+	const rateVal = (value) => {
+		setratingValue(value);
+	};
 
 	const [newProduct, setNewProduct] = useState({
 		title: '',
@@ -16,6 +24,7 @@ const AddForm = forwardRef((props, ref) => {
 	});
 
 	const onInputChange = (event) => {
+		console.log('event', event.target);
 		if (event.target.name === 'category') {
 			let copy = { ...newProduct };
 			if (event.target.checked) {
@@ -31,6 +40,7 @@ const AddForm = forwardRef((props, ref) => {
 				[event.target.name]: event.target.value,
 			}));
 		}
+		console.log('first', event.target.name, event.target.value);
 	};
 
 	const { title, category, description, price, image, rating } = newProduct;
@@ -80,8 +90,9 @@ const AddForm = forwardRef((props, ref) => {
 				</Form.Group>
 
 				<Form.Group>
-					<Form.Label>Category</Form.Label>
-
+					<div style={{ marginTop: '10px' }}>
+						<Form.Label>Category</Form.Label>
+					</div>
 					<div key="inline-checkbox" className="modal-category-wrap">
 						<Form.Check
 							inline
@@ -123,14 +134,12 @@ const AddForm = forwardRef((props, ref) => {
 				</Form.Group>
 
 				<Form.Group>
-					<div>
-						{' '}
-						<Form.Label style={{ marginTop: '15px' }}>Rating</Form.Label>{' '}
-					</div>
+					<Form.Label style={{ marginTop: '15px' }}>Rating</Form.Label>
 
 					<div style={{ display: 'flex' }}>
-						{' '}
-						<StarRating />{' '}
+						{/* <Star rate={'4.9'} /> */}
+						<StarRating value={rateVal} />
+						{console.log('rateValue', rateVal)}
 					</div>
 				</Form.Group>
 			</Form>
