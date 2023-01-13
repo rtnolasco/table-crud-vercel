@@ -7,9 +7,9 @@ const StarsRating = ({ rateVal }) => {
 
 	console.log('ratingValue', rating);
 
-	useEffect = () => {
-		rateVal(rating);
-	};
+	// useEffect = () => {
+	// 	rateVal(rating);
+	// };
 
 	return (
 		<div>
