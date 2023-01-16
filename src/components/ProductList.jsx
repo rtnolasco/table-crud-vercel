@@ -12,10 +12,8 @@ const ProductList = () => {
 
 	const [show, setShow] = useState(false);
 	const handleShowModal = () => setShow(true);
-	// const [show2, setShow2] = useState(false);
-	// const handleShowModal2 = () => setShow2(true);
+
 	const handleCloseModal = () => setShow(false);
-	// const handleCloseModal2 = () => setShow2(false);
 
 	//construct pagination
 	const [currentPage, setCurrentPage] = useState(1);
@@ -29,7 +27,6 @@ const ProductList = () => {
 	// handle child to parent
 	const addFormRef = useRef();
 
-	// console.log('ref2', addFormRef2);
 	useEffect(() => {
 		handleCloseModal();
 	}, [products]);
@@ -91,7 +88,6 @@ const ProductList = () => {
 
 				<Modal.Footer></Modal.Footer>
 			</Modal>
-			{/* // modal 2 */}
 
 			<Pagination pages={totalPagesNum} setCurrentPage={setCurrentPage} />
 		</>

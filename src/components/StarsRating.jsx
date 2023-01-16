@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { FaStar } from 'react-icons/fa';
 
-const StarsRating = ({ rateVal }) => {
-	const [rating, setRating] = useState(null);
+const StarsRating = (e, props, ref) => {
+	const [srating, setSrating] = useState(null);
 	const [hover, setHover] = useState(null);
 
-	console.log('ratingValue', rating);
-
-	// useEffect = () => {
-	// 	rateVal(rating);
-	// };
+	// console.log('props', props);
+	// console.log('evt', e.target);
 
 	return (
 		<div>
@@ -24,10 +21,11 @@ const StarsRating = ({ rateVal }) => {
 							style={{ display: 'none' }}
 							value={ratingValue}
 							onClick={() => setRating(ratingValue)}
+							// onChange={(e) => props.onChange(e.target)}
 						/>
 						<FaStar
 							className="star"
-							color={ratingValue <= (hover || rating) ? 'orange' : 'gray'}
+							color={ratingValue <= (hover || srating) ? 'orange' : 'gray'}
 							size={20}
 							onMouseEnter={() => setHover(ratingValue)}
 							onMouseLeave={() => setHover(null)}
@@ -35,7 +33,7 @@ const StarsRating = ({ rateVal }) => {
 					</label>
 				);
 			})}
-			<p style={{ marginTop: '10px' }}>rating is {rating}</p>
+			<p style={{ marginTop: '10px' }}>rating is {srating}</p>
 		</div>
 	);
 };

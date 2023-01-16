@@ -2,6 +2,7 @@ import { React, useContext, useState, forwardRef, useImperativeHandle } from 're
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import StarRating from '../StarsRating';
 import { ProductContext } from '../../context/ProductContext';
+import { FaStar } from 'react-icons/fa';
 
 const EditForm = forwardRef(({ productsEdit }, ref) => {
 	const id = productsEdit.id;
@@ -12,6 +13,28 @@ const EditForm = forwardRef(({ productsEdit }, ref) => {
 	const [price, setPrice] = useState(productsEdit.price);
 	const [image, setImage] = useState(productsEdit.image);
 	const [description, setDescription] = useState(productsEdit.description);
+	// const [rating, setRating] = useState({});
+	const [rating, setRating] = useState([productsEdit.rating.rate]);
+	const [hover, setHover] = useState(null);
+
+	const handleRating = (e) => {
+		if (e.target.name === 'rating') {
+			console.log('rating', rating);
+			console.log('targetValue', e.target.value);
+			// let pushValue = { ...rating };
+			// console.log('pushValues: ', pushValue);
+			// let rating1 = rating;
+			// console.log('rating_set: ', rating1);
+			rating.push(e.target.value);
+
+			// setRating();
+		} else {
+			setRating(() => ({
+				...rating,
+				[e.target.name]: e.target.value,
+			}));
+		}
+	};
 
 	const handleChangeCheckbox = (e) => {
 		if (e.target.name === 'category') {
@@ -26,8 +49,8 @@ const EditForm = forwardRef(({ productsEdit }, ref) => {
 		}
 	};
 
-	const updatedProduct = { id, title, category, price, image, description };
-
+	const updatedProduct = { id, title, category, price, image, description, rating };
+	// console.log('Updated rating', updatedProduct.rating);
 	const handleSubmit = (e) => {
 		updateProduct(id, updatedProduct);
 	};
@@ -135,11 +158,34 @@ const EditForm = forwardRef(({ productsEdit }, ref) => {
 				</Form.Group>
 
 				<Form.Group>
-					<Form.Label>Rating</Form.Label>
+					<Form.Label style={{ marginTop: '15px' }}>Rating</Form.Label>
 
-					<div style={{ display: 'flex' }}>
-						{' '}
-						<StarRating />{' '}
+					<div>
+						{[...Array(5)].map((star, i) => {
+							const ratingValue = i + 1;
+
+							return (
+								<label key={i}>
+									<Form.Control
+										type="radio"
+										name="rating"
+										style={{ display: 'none' }}
+										value={ratingValue}
+										onClick={() => setRating(ratingValue)}
+										// onChange={(e) => setRating(e.target.value)}
+										onChange={handleRating}
+									/>
+									<FaStar
+										className="star"
+										color={ratingValue <= (hover || rating) ? 'orange' : 'gray'}
+										size={20}
+										onMouseEnter={() => setHover(ratingValue)}
+										onMouseLeave={() => setHover(null)}
+									/>
+								</label>
+							);
+						})}
+						<p style={{ marginTop: '10px' }}>rating is {rating}</p>
 					</div>
 				</Form.Group>
 			</Form>

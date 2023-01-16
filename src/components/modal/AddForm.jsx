@@ -1,18 +1,16 @@
-import { useContext, useState, forwardRef, useImperativeHandle, useEffect } from 'react';
+import { useContext, useState, forwardRef, useImperativeHandle, useEffect, useRef } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import StarRating from '../StarsRating';
+// import StarRating from '../StarsRating';
 import { ProductContext } from '../../context/ProductContext';
-import Star from '../Star';
+
+import { FaStar } from 'react-icons/fa';
 
 const AddForm = forwardRef((props, ref) => {
-	// const { products, loading } = useContext(ProductContext);
+	// star rating
+	const [srating, setSrating] = useState('');
+	const [hover, setHover] = useState(null);
+
 	const { addProduct } = useContext(ProductContext);
-
-	const [ratingValue, setratingValue] = useState('');
-
-	const rateVal = (value) => {
-		setratingValue(value);
-	};
 
 	const [newProduct, setNewProduct] = useState({
 		title: '',
@@ -20,11 +18,32 @@ const AddForm = forwardRef((props, ref) => {
 		description: '',
 		price: '',
 		image: '',
-		rating: '',
+		rating: {
+			rate: [],
+		},
 	});
 
 	const onInputChange = (event) => {
-		console.log('event', event.target);
+		if (event.target.name === 'rate') {
+			console.log('eventrating', event.target.name, event.target.value);
+			let rates = { ...newProduct };
+
+			rates.rating.rate.push(event.target.value);
+
+			setNewProduct(rates.rating.rate);
+		} else {
+			setNewProduct(() => ({
+				...newProduct,
+				[event.target.name]: event.target.value,
+			}));
+		}
+		// else {
+		// 	setNewProduct(() => ({
+		// 		...newProduct,
+		// 		[event.target.name]: event.target.value,
+		// 	}));
+		// }
+
 		if (event.target.name === 'category') {
 			let copy = { ...newProduct };
 			if (event.target.checked) {
@@ -40,13 +59,15 @@ const AddForm = forwardRef((props, ref) => {
 				[event.target.name]: event.target.value,
 			}));
 		}
-		console.log('first', event.target.name, event.target.value);
+		// console.log('first', event.target.name, event.target.value);
 	};
 
+	console.log('newProduct', ...newProduct.rating.rate);
 	const { title, category, description, price, image, rating } = newProduct;
 
 	const handleSubmit = (e) => {
 		addProduct(title, category, description, price, image, rating);
+		console.log('submit', addProduct);
 	};
 
 	useImperativeHandle(ref, () => ({
@@ -135,11 +156,35 @@ const AddForm = forwardRef((props, ref) => {
 
 				<Form.Group>
 					<Form.Label style={{ marginTop: '15px' }}>Rating</Form.Label>
+					{/* <div style={{ display: 'flex' }}>
+						<StarRating name="rating" onChange={onInputChange} />
+					</div> */}
 
-					<div style={{ display: 'flex' }}>
-						{/* <Star rate={'4.9'} /> */}
-						<StarRating value={rateVal} />
-						{console.log('rateValue', rateVal)}
+					<div>
+						{[...Array(5)].map((star, i) => {
+							const ratingValue = i + 1;
+
+							return (
+								<label key={i}>
+									<Form.Control
+										type="radio"
+										name="rate"
+										style={{ display: 'none' }}
+										value={ratingValue}
+										onClick={() => setSrating(ratingValue)}
+										onChange={onInputChange}
+									/>
+									<FaStar
+										className="star"
+										color={ratingValue <= (hover || srating) ? 'orange' : 'gray'}
+										size={20}
+										onMouseEnter={() => setHover(ratingValue)}
+										onMouseLeave={() => setHover(null)}
+									/>
+								</label>
+							);
+						})}
+						<p style={{ marginTop: '10px' }}>rating is {srating}</p>
 					</div>
 				</Form.Group>
 			</Form>

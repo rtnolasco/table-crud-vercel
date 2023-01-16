@@ -8,7 +8,7 @@ const Star = ({ rate, count }) => {
 
 		return (
 			<span key={index}>
-				{rate > index + 1 ? (
+				{rate >= index + 1 ? (
 					<FaStar className="icon" />
 				) : rate > number ? (
 					<FaStarHalfAlt className="icon" />
@@ -29,21 +29,4 @@ const Star = ({ rate, count }) => {
 	);
 };
 
-// const Wrapper = styled.section`
-// 	.icon-style {
-// 		display: flex;
-// 		gap: 0.2rem;
-// 		align-items: center;
-// 		justify-content: flex-start;
-// 	}
-
-// 	.icon {
-// 		font-size: 2rem;
-// 		color: orange;
-// 	}
-
-// 	.empty-icon {
-// 		font-size: 2.6rem;
-// 	}
-// `;
 export default Star;
