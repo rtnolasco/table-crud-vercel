@@ -9,29 +9,23 @@ const EditForm = forwardRef(({ productsEdit }, ref) => {
 	const { updateProduct } = useContext(ProductContext);
 
 	const [title, setTitle] = useState(productsEdit.title);
-	const [category, setCategory] = useState([]);
+	const [category, setCategory] = useState([productsEdit.category]);
 	const [price, setPrice] = useState(productsEdit.price);
 	const [image, setImage] = useState(productsEdit.image);
 	const [description, setDescription] = useState(productsEdit.description);
 	// const [rating, setRating] = useState({});
-	const [rating, setRating] = useState([productsEdit.rating.rate]);
+	const [rating, setRating] = useState({
+		rating: {
+			rate: productsEdit.rating.rate,
+		},
+	});
 	const [hover, setHover] = useState(null);
 
 	const handleRating = (e) => {
 		if (e.target.name === 'rating') {
-			console.log('rating', rating);
-			console.log('targetValue', e.target.value);
-			// let pushValue = { ...rating };
-			// console.log('pushValues: ', pushValue);
-			// let rating1 = rating;
-			// console.log('rating_set: ', rating1);
-			rating.push(e.target.value);
-
-			// setRating();
-		} else {
-			setRating(() => ({
-				...rating,
-				[e.target.name]: e.target.value,
+			setRating((rate) => ({
+				rate,
+				rate: e.target.value,
 			}));
 		}
 	};
@@ -50,7 +44,7 @@ const EditForm = forwardRef(({ productsEdit }, ref) => {
 	};
 
 	const updatedProduct = { id, title, category, price, image, description, rating };
-	// console.log('Updated rating', updatedProduct.rating);
+	console.log('Updated rating', updatedProduct.rating);
 	const handleSubmit = (e) => {
 		updateProduct(id, updatedProduct);
 	};
@@ -177,7 +171,7 @@ const EditForm = forwardRef(({ productsEdit }, ref) => {
 									/>
 									<FaStar
 										className="star"
-										color={ratingValue <= (hover || rating) ? 'orange' : 'gray'}
+										color={ratingValue <= (hover || rating.rate) ? 'orange' : 'gray'}
 										size={20}
 										onMouseEnter={() => setHover(ratingValue)}
 										onMouseLeave={() => setHover(null)}
@@ -185,7 +179,7 @@ const EditForm = forwardRef(({ productsEdit }, ref) => {
 								</label>
 							);
 						})}
-						<p style={{ marginTop: '10px' }}>rating is {rating}</p>
+						<p style={{ marginTop: '10px' }}>rating is {rating.rate}</p>
 					</div>
 				</Form.Group>
 			</Form>
