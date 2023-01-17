@@ -9,7 +9,7 @@ const EditForm = forwardRef(({ productsEdit }, ref) => {
 	const { updateProduct } = useContext(ProductContext);
 
 	const [title, setTitle] = useState(productsEdit.title);
-	const [category, setCategory] = useState([productsEdit.category]);
+	const [category, setCategory] = useState([]);
 	const [price, setPrice] = useState(productsEdit.price);
 	const [image, setImage] = useState(productsEdit.image);
 	const [description, setDescription] = useState(productsEdit.description);
